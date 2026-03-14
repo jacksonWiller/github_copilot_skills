@@ -138,8 +138,10 @@ Perguntar ao usuário:
 - Empresa/vaga específica? (para adaptar palavras-chave)
 
 ### 2. Selecionar Template
-- **Português**: [template-pt.md](./assets/template-pt.md)
-- **Inglês**: [template-en.md](./assets/template-en.md)
+- **Português**: [template-pt.html](./assets/template-pt.html)
+- **Inglês**: [template-en.html](./assets/template-en.html)
+
+> **Nota:** Os currículos devem ser gerados inicialmente em HTML. Os templates HTML incluem CSS inline com layout profissional, formatação ATS-safe e estilo pronto para impressão/PDF.
 
 ### 3. Adaptar Conteúdo ao Contexto
 
@@ -167,10 +169,17 @@ Aplicar as [dicas de otimização para ATS](./references/dicas-ats.md):
 - ✓ 1-2 páginas de tamanho
 
 ### 6. Gerar PDF
-Converter usando [guia de geração de PDF](./references/gerar-pdf.md):
+O currículo é gerado inicialmente em HTML. Para converter em PDF, usar o [guia de geração de PDF](./references/gerar-pdf.md):
+
+**Método recomendado (Node.js — Puppeteer via npx):**
 ```powershell
-pandoc curriculo.md -o curriculo-jackson-willer.pdf --pdf-engine=xelatex -V geometry:margin=2cm -V fontsize=11pt -V colorlinks=true
+npx puppeteer-html2pdf --input curriculo.html --output curriculo-jackson-willer.pdf --format A4 --margin-top 0 --margin-bottom 0 --margin-left 0 --margin-right 0
 ```
+
+**Alternativa rápida (abrir HTML no navegador):**
+1. Abrir o arquivo `.html` no Chrome/Edge
+2. `Ctrl+P` → Salvar como PDF
+3. Margens: Nenhuma (o CSS já define as margens)
 
 ## Procedimento: Revisar Currículo Existente
 
@@ -222,8 +231,10 @@ Desenvolvedor full-stack com mais de 6 anos de experiência, forte em .NET, APIs
 C#, .NET, .NET Core, ASP.NET, Angular, React, Node.js, AWS, Azure, Microservices, Serverless, API REST, CI/CD, Azure DevOps, GitHub, SQL Server, MongoDB, PostgreSQL, SOLID, DDD, Clean Code, Cloud-native, Software Engineering, Legacy Modernization
 
 ## Recursos
-- [Template Português](./assets/template-pt.md)
-- [Template Inglês](./assets/template-en.md)
+- [Template Português (HTML)](./assets/template-pt.html)
+- [Template Inglês (HTML)](./assets/template-en.html)
+- [Template Português (Markdown — referência)](./assets/template-pt.md)
+- [Template Inglês (Markdown — referência)](./assets/template-en.md)
 - [Dicas ATS](./references/dicas-ats.md)
 - [Tecnologias .NET](./references/tecnologias-net.md)
 - [Guia PDF](./references/gerar-pdf.md)

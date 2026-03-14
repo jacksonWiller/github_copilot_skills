@@ -1,6 +1,8 @@
 # Skill: Currículo — Jackson Willer Macedo Duarte
 
-Skill para geração de currículos profissionais personalizados para **Jackson Willer Macedo Duarte**, desenvolvedor full-stack .NET com 6+ anos de experiência. Suporte bilíngue (PT-BR / EN-US), otimização ATS e exportação para PDF/DOCX/HTML.
+Skill para geração de currículos profissionais personalizados para **Jackson Willer Macedo Duarte**, desenvolvedor full-stack .NET com 6+ anos de experiência. Suporte bilíngue (PT-BR / EN-US), otimização ATS e exportação para PDF/DOCX.
+
+> **Formato primário: HTML.** Os currículos são gerados inicialmente em HTML com CSS inline, garantindo layout profissional e fidelidade na conversão para PDF.
 
 ## Como Usar
 
@@ -32,19 +34,22 @@ curriculo-dev-net/
 ├── SKILL.md                      # Instruções, dados e workflow completo
 ├── README.md                     # Este arquivo
 ├── assets/
-│   ├── template-pt.md            # Currículo completo em português
-│   └── template-en.md            # Currículo completo em inglês
+│   ├── template-pt.html          # Currículo HTML em português (formato primário)
+│   ├── template-en.html          # Currículo HTML em inglês (formato primário)
+│   ├── template-pt.md            # Currículo Markdown em português (referência)
+│   └── template-en.md            # Currículo Markdown em inglês (referência)
 └── references/
     ├── dicas-ats.md              # Otimização para ATS
     ├── tecnologias-net.md        # Stack técnica com priorização por vaga
-    └── gerar-pdf.md              # Guia de conversão para PDF/DOCX/HTML
+    └── gerar-pdf.md              # Guia de conversão HTML → PDF/DOCX
 ```
 
 ## Funcionalidades
 
-### Templates Prontos
-- Currículo completo em Português (BR)
-- Currículo completo em Inglês (US)
+### Templates Prontos (HTML)
+- Currículo HTML completo em Português (BR) com CSS inline
+- Currículo HTML completo em Inglês (US) com CSS inline
+- Templates Markdown mantidos como referência
 - Preenchidos com todas as experiências, habilidades e certificações de Jackson
 
 ### Adaptação Inteligente por Tipo de Vaga
@@ -59,9 +64,9 @@ curriculo-dev-net/
 - Técnica de espelhamento de vagas
 
 ### Exportação Multi-formato
-- Markdown → PDF (Pandoc ou VS Code Extension)
-- Markdown → DOCX (Word)
-- Markdown → HTML
+- HTML → PDF (Chrome/Edge Print ou Puppeteer)
+- HTML → DOCX (Pandoc)
+- HTML → Markdown (Pandoc, para referência)
 
 ## Perfil Resumido
 
@@ -77,8 +82,10 @@ Desenvolvedor Full-Stack | .NET | Cloud-Native | Microsserviços
 
 ## Recursos
 
-- [Template Português](./assets/template-pt.md)
-- [Template Inglês](./assets/template-en.md)
+- [Template Português (HTML)](./assets/template-pt.html)
+- [Template Inglês (HTML)](./assets/template-en.html)
+- [Template Português (Markdown)](./assets/template-pt.md)
+- [Template Inglês (Markdown)](./assets/template-en.md)
 - [Dicas ATS](./references/dicas-ats.md)
 - [Stack Técnica](./references/tecnologias-net.md)
-- [Guia PDF](./references/gerar-pdf.md)
+- [Guia PDF (HTML → PDF)](./references/gerar-pdf.md)
