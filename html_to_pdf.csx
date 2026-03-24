@@ -21,7 +21,10 @@ async Task ConverterHtmlParaPdf(string arquivoHtml)
         return;
     }
 
-    var arquivoPdf = Path.ChangeExtension(arquivoHtml, ".pdf");
+    var hash = DateTime.Now.Ticks.GetHashCode().ToString("X").PadLeft(3, '0')[..3];
+    var nome = Path.GetFileNameWithoutExtension(arquivoHtml);
+    var dir = Path.GetDirectoryName(arquivoHtml) ?? ".";
+    var arquivoPdf = Path.Combine(dir, $"{nome}-{hash}.pdf");
     Console.WriteLine($"Convertendo '{arquivoHtml}' para '{arquivoPdf}'...");
 
     // Baixa o Chromium automaticamente (apenas na primeira vez)
@@ -30,7 +33,7 @@ async Task ConverterHtmlParaPdf(string arquivoHtml)
     await browserFetcher.DownloadAsync();
 
     // Abre o navegador headless
-    await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = true });
+    await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions { Headless = false });
     await using var page = await browser.NewPageAsync();
 
     // Carrega o HTML local
@@ -38,15 +41,27 @@ async Task ConverterHtmlParaPdf(string arquivoHtml)
     var uri = new Uri(caminhoAbsoluto).AbsoluteUri;
     await page.GoToAsync(uri, new NavigationOptions { WaitUntil = new[] { WaitUntilNavigation.Networkidle0 } });
 
+    // Injeta CSS para margem superior menor na primeira página e maior nas demais
+    await page.AddStyleTagAsync(new AddTagOptions
+    {
+        Content = @"
+            @page:first { margin-top: 10px !important; }
+            @page { margin-top: 50px !important; }
+        "
+    });
+
     // Gera o PDF mantendo layout idêntico
     await page.PdfAsync(arquivoPdf, new PdfOptions
     {
         Format = PuppeteerSharp.Media.PaperFormat.A4,
         PrintBackground = true,
+        DisplayHeaderFooter = true,
+        HeaderTemplate = "<div style='font-size:10px; text-align:center; width:100%;'></div>",
+        FooterTemplate = "<div style='font-size:10px; text-align:center; width:100%;'>Página <span class='pageNumber'></span> de <span class='totalPages'></span></div>",
         MarginOptions = new PuppeteerSharp.Media.MarginOptions
         {
             Top = "0px",
-            Bottom = "0px",
+            Bottom = "50px",
             Left = "0px",
             Right = "0px"
         }
