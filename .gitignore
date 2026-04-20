@@ -1,0 +1,18 @@
+# Pasta de lixo/arquivos temporários
+lixo/
+
+# Arquivos PDF gerados (opcional - descomente se quiser ignorar PDFs)
+# *.pdf
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Artefatos de build e cache
+bin/
+obj/
+.vs/
+.vscode/
+
+# Dependências
+node_modules/
